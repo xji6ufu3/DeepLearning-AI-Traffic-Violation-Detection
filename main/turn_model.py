@@ -32,8 +32,8 @@ class ResidualBlock(nn.Module):
     
 
 class ResNet(nn.Module):
-    #block為residualBlock
-    #num_classes 記得改成我們的類別
+    # block 為 residualBlock
+    # num_classes 記得改成我們的類別
     def __init__(self, block, layers, num_classes = 10):
         super(ResNet, self).__init__()
         self.inplanes = 64
@@ -85,20 +85,33 @@ class ResNet(nn.Module):
 
 #dataloader
 
+# 一個影像的預處理管道，transforms.Compose 將多個轉換操作組合起來，生成適合深度學習模型輸入的格式
 test_transforms = transforms.Compose([
+    # 影像調整為指定大小 (224, 224)
     transforms.Resize((224,224)),
+    # 將影像從 PIL 格式轉換為 PyTorch 的 Tensor 格式
     transforms.ToTensor(),
     #transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
-
+# 將一組影像，轉換為 RGB、轉為 PIL、調整大小並轉為 PyTorch 的 Tensor
+# 組合成一組轉換後的影像的 list 後，再轉換為 PyTorch 的 DataLoader 格式，供模型進行推論測試
+# 設定每批次取出 4 張影像進行處理
 def make_test_dataloader(imgs):
+    # images 用於儲存轉換後的影像
     images = []
     for item in imgs:
+        # 使用 OpenCV 的 cv.cvtColor 將影像從 BGR 格式轉換為 RGB 格式。
+        # 再使用 PIL 的 Image.fromarray 方法將陣列轉換為 PIL 影像格式 
         img = Image.fromarray(cv.cvtColor(item, cv.COLOR_BGR2RGB))
+        # 調整影像大小，並轉換影像為 PyTorch 的 Tensor 格式
         img = test_transforms(img)
+        # 將轉換後的影像加入到 images 這個 list 裡面
         images.append(img)
+    # 將 images 列表中的 Tensor 格式影像堆疊成一個新的 PyTorch Tensor (testData)
     testData = torch.stack(images)
+    # 使用 PyTorch 的 DataLoader 將 testData 包裝成批次的資料載入器 (test_loader)
+    # 指定 batch_size=4，表示每次取出 4 張影像進行處理。
     test_loader = torch.utils.data.DataLoader(dataset=testData, batch_size=4)
     # print('test_loader:', len(test_loader))
     return test_loader

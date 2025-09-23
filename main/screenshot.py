@@ -34,7 +34,7 @@ def draw_text(img,
     cv2.putText(img, text, (x, y + text_h + font_scale - 1), font, font_scale, text_color, fone_thickness)
     return img 
 
-#輸入四個圖片並合併
+# 輸入四個圖片並合併
 def merge_picture(imgs):
     top = cv2.vconcat([imgs[0], imgs[2]])
     bottom = cv2.vconcat([imgs[1], imgs[3]])
@@ -42,8 +42,7 @@ def merge_picture(imgs):
     return result
 
 def save_img(violation_image, car_id, output_folder):
-    result_folder = os.path.join(os.getcwd(), "public", "result")
-    output_path = os.path.join(result_folder, f"{filename}_car{car_id}.jpg")
+    output_path = os.path.join(output_folder, "car"+str(car_id)+".jpg")
     cv2.imwrite(output_path, violation_image)
     # print("the result is saved in " + output_path)
 
@@ -74,12 +73,12 @@ def big_img(img, x, y, w, h, imgx, imgy):
     img = img[y1:y2, x1:x2]
     return img
 
-#從video的turn_data.csv取得某部轉彎車輛的資料
-#影片在車輛偵測就轉成一張張圖片存進frame中了
-def make_violation_image(four_imgs, four_bboxs, car_id, license_plate, filename):
+# 從video的turn_data.csv取得某部轉彎車輛的資料
+# 影片在車輛偵測就轉成一張張圖片存進frame中了
+def make_violation_image(four_imgs, four_bboxs, car_id, license_plate, output_folder):
 
     imgs = []
-    #處理前三張照片，取整個過程中40%, 60%, 80%的幀數訊息
+    # 處理前三張照片，取整個過程中40%, 60%, 80%的幀數訊息
     for i in range(3):
         x, y, w, h = four_bboxs[i]
         #畫矩形
@@ -108,7 +107,7 @@ def make_violation_image(four_imgs, four_bboxs, car_id, license_plate, filename)
     violation_image = merge_picture(imgs)
 
     #儲存
-    save_img(violation_image, car_id, filename)
+    save_img(violation_image, car_id, output_folder)
     
      
     
