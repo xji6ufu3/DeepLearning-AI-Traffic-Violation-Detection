@@ -1,0 +1,8 @@
+train: D:\Program_Design\Capstone_Project\drive-download-20241222T020320Z-001\Real-Time-Detection-of-Traffic-Violation-main\turn_signal_position_detection\dataset\images\train
+val: D:\Program_Design\Capstone_Project\drive-download-20241222T020320Z-001\Real-Time-Detection-of-Traffic-Violation-main\turn_signal_position_detection\dataset\images\val
+test: D:\Program_Design\Capstone_Project\drive-download-20241222T020320Z-001\Real-Time-Detection-of-Traffic-Violation-main\turn_signal_position_detection\dataset\images\test
+
+# 類別數（number of classes）
+nc: 2 
+# 每一類的名字（按順序對應 class index）
+names: ['L_light', 'R_light']
