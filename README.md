@@ -116,17 +116,25 @@
     |-- light_model_train/ # 車燈模型訓練
         |--train.py  
     |-- main/              # 系統主程式
+        |--demo_video/     # 存放輸入影片
         |--weight/
-           |--yolov8n.pt   # 車輛追蹤
+           |--yolo11m.pt   # 車輛追蹤
            |--turn.pth     # 轉彎判斷
-           |--light.pt     # 車燈判斷
+           |--light.pt     # 方向燈亮暗與違規判斷
+           |--transformer_yolo_weight.pth   # 方向燈亮暗狀態判斷
+           |--yolo_light_train2_best.pt     # 方向燈區域擷取
         |--screenshot.py
-        |--main.py
-        |--car_track.py    # 車輛偵測
-        |--turn.py         # 轉彎判斷
-        |--turn_model.py   # 轉彎模型
-        |--light.py        # 車燈判斷
-        |--screenshot.py   # 產生違規照片
+        |--main.py                          # 系統主程式
+        |--car_track.py                     # 車輛偵測與追蹤
+        |--turn.py                          # 轉彎判斷
+        |--turn_model.py                    # 轉彎模型
+        |--light.py                         # 方向燈亮暗與違規判斷
+        |--screenshot.py                    # 產生違規照片
+        |--config_max.py                    # 系統參數設定
+        |--dataLoad_max.py                  # 資料載入
+        |--test_new.py                      # 方向燈區域擷取
+        |--test_max_transformer.py          # 方向燈亮暗狀態判斷
+        |--model_max.py                     # ResNet34 與 TransformerEncoder 組合的方向燈亮暗狀態識別模型實作
     |-- light_model_method    # 車燈模型改善方法
         |-- CNNLSTM/             
         |-- SegNet/ 
@@ -148,5 +156,21 @@
                     |-- light_predict.csv   # 違規模型預測結果
                 |-- violation/              # 儲存違規照片 
     |-- README.md          # 專案說明文件
+    |-- turn_signal_position_detection/
+        |-- dataset/        # 資料與標註集
+            |-- images/
+                |-- train/
+                |-- test/
+                |-- val/
+            |-- labels/
+                |-- train/
+                |-- test/
+                |-- val/
+            |--dataset.yaml
+        |-- input/          # 輸入要擷取方向燈區域的車尾圖
+        |-- output/         # 模型輸出圖片存放
+        |-- runs/           # yolo 方向燈擷取模型訓練成果
+        |--test_new.py      # 方向燈擷取模型測試
+        |--train_yolo_light_location.py     # 方向燈擷取模型訓練
 
 ```
