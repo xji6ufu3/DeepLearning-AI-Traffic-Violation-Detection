@@ -52,10 +52,10 @@ class LiveFeedController extends BaseController
     log_message('info', 'start_detection method called');
 
     // 資料夾名稱設定為 'error'
-    $video_name = 'C:\\Users\\vicky\\Desktop\\PJ74\\Real-Time-Detection-of-Traffic-Violation-main\\RT_DTV_website\\public\\python\\error';  
-    $python = 'C:\\Users\\vicky\\anaconda3\\envs\\pj11\\python.exe';
-    $script = 'C:\\Users\\vicky\\Desktop\\PJ74\\Real-Time-Detection-of-Traffic-Violation-main\\RT_DTV_website\\public\\python\\main.py';
-    $workingDir = 'C:\\Users\\vicky\\Desktop\\PJ74\\Real-Time-Detection-of-Traffic-Violation-main\\RT_DTV_website\\public\\python';
+    $video_name = 'E:\\DeepLearning-AI-Traffic-Violation-Detection\\RT_DTV_website\\public\\python\\error';  
+    $python = 'D:\\anaconda3\\python.exe';
+    $script = 'E:\\DeepLearning-AI-Traffic-Violation-Detection\\RT_DTV_website\\public\\python\\main.py';
+    $workingDir = 'E:\\DeepLearning-AI-Traffic-Violation-Detection\\RT_DTV_website\\public\\python';
 
     // 設定 log 文件儲存路徑
     $logDir = WRITEPATH . 'logs';
